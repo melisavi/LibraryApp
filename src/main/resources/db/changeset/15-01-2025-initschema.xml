@@ -5,24 +5,35 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <changeSet id="15-01-2025-initschema.xml" author="rog">
         <createTable tableName="authors" remarks="table of authors">
-            <column name="id" type="integer" autoIncrement="true" startWith="1" incrementBy="1">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="text">
+            <column name="first_name" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="birth_date" type="timestamp with time zone"/>
+            <column name="last_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="death_date" type="date">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <createTable tableName="books" remarks="table of books">
-            <column name="id" type="integer" autoIncrement="true" startWith="1" incrementBy="1">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="title" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="author_id" type="integer">
-                <constraints foreignKeyName="book_author_id" references="authors(id)" deleteCascade="true"/>
+            <column name="author_id" type="bigint">
+                <constraints foreignKeyName="book_author_id" references="authors(id)"/>
             </column>
         </createTable>
     </changeSet>
