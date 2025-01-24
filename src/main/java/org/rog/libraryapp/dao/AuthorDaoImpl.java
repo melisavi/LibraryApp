@@ -6,38 +6,44 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.util.*;
 
 @Repository
 public class AuthorDaoImpl implements AuthorDao {
 
-    private static final String FIND_ALL_AUTHORS = "select * from authors";
-    private static final String FIND_AUTHOR_BY_ID = "select * from authors where id = ?";
+    private static final String FIND_ALL_AUTHORS = "select a.id as author_id, a.first_name, a.last_name, a.middle_name, a.birth_date, a.death_date, " +
+            "b.id as book_id, b.title " +
+            "from books as b join authors a on b.author_id = a.id";
+    private static final String FIND_AUTHOR_BY_ID = FIND_ALL_AUTHORS + " where a.id = ?";
     private static final String SAVE_AUTHOR = "insert into authors (first_name, last_name, middle_name, birth_date, death_date) values (?, ?, ?, ?, ?)";
     private static final String UPDATE_AUTHOR = "update authors set first_name = ?, last_name = ?, middle_name = ?, birth_date = ?, death_date = ? where id = ?";
     private static final String DELETE_AUTHOR = "delete from authors where id = ?";
-    private static final String FIND_AUTHOR_BOOKS = "select * from books where author_id = ?";
 
-    private final BookDao bookDao;
     private final DataSource dataSource;
 
-    public AuthorDaoImpl(DataSource dataSource, BookDao bookDao) {
+    public AuthorDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.bookDao = bookDao;
     }
 
     @Override
     public List<Author> findAllAuthors() {
-        List<Author> authors = new ArrayList<>();
+        Map<Long, Author> authors = new HashMap<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_AUTHORS)){
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_AUTHORS)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                authors.add(fillAuthor(resultSet));
+                Long authorId = resultSet.getLong("author_id");
+                Book book = fillBook(resultSet);
+                if (authors.containsKey(authorId)) {
+                    authors.get(authorId).getBooks().add(book);
+                } else {
+                    Author author = fillAuthor(resultSet);
+                    author.getBooks().add(book);
+                    authors.put(authorId, author);
+                }
             }
-            return authors;
+            return new ArrayList<>(authors.values());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -46,11 +52,15 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Optional<Author> findAuthorById(Long id) { //Long
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_AUTHOR_BY_ID)){
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_AUTHOR_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                return Optional.of(fillAuthor(resultSet));
+            if (resultSet.next()) {
+                Author author = fillAuthor(resultSet);
+                do {
+                    author.getBooks().add(fillBook(resultSet));
+                } while (resultSet.next());
+                return Optional.of(author);
             }
             return Optional.empty();
         } catch (SQLException e) {
@@ -74,14 +84,14 @@ public class AuthorDaoImpl implements AuthorDao {
             }
             return Optional.of(author.getId());
         } catch (SQLException e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public Optional<Author> updateAuthor(Author author) {
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AUTHOR)){
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AUTHOR)) {
             preparedStatement.setString(1, author.getFirstName());
             preparedStatement.setString(2, author.getLastName());
             preparedStatement.setString(3, author.getMiddleName());
@@ -98,7 +108,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public void deleteAuthor(Long id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_AUTHOR)){
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_AUTHOR)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -108,7 +118,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
     private Author fillAuthor(ResultSet resultSet) throws SQLException {
         Author author = new Author();
-        Long authorId = resultSet.getLong("id");
+        Long authorId = resultSet.getLong("author_id");
         author.setId(authorId);
         author.setFirstName(resultSet.getString("first_name"));
         author.setLastName(resultSet.getString("last_name"));
@@ -116,7 +126,13 @@ public class AuthorDaoImpl implements AuthorDao {
         author.setBirthDate(resultSet.getDate("birth_date").toLocalDate());
         author.setDeathDate(resultSet.getDate("death_date").toLocalDate());
 
-        author.setBooks(bookDao.findAllBooksByAuthor(authorId));
+        author.setBooks(new ArrayList<>());
         return author;
+    }
+
+    private Book fillBook(ResultSet resultSet) throws SQLException {
+        Book book = new Book(resultSet.getLong("book_id"),
+                resultSet.getString("title"));
+        return book;
     }
 }

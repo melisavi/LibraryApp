@@ -30,7 +30,7 @@ public class BookDaoImpl implements BookDao {
             while (resultSet.next()) {
                 Long bookId = resultSet.getLong("id");
                 String bookTitle = resultSet.getString("title");
-                Book book = new Book(bookId, bookTitle, authorId);
+                Book book = new Book(bookId, bookTitle);
                 books.add(book);
             }
             return books;
