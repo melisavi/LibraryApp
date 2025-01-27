@@ -1,5 +1,6 @@
 package org.rog.libraryapp.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.rog.libraryapp.dto.AuthorDto;
 import org.rog.libraryapp.entity.Author;
 import org.rog.libraryapp.mapper.AuthorMapper;
@@ -9,28 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @RestController
 public class AuthorController {
     private final AuthorService authorService;
     private final AuthorMapper authorMapper;
 
-    public AuthorController(AuthorService authorService, AuthorMapper authorMapper) {
-        this.authorService = authorService;
-        this.authorMapper = authorMapper;
-    }
-
-    @GetMapping("/authors")
+    @GetMapping("/authors/withbooks")
     public List<AuthorDto> getAllAuthors(){
-        //return authorService.findAllAuthors();
-        //AuthorMapper authorMapper = new AuthorMapper();
         return authorService.findAllAuthors().stream().map(a -> authorMapper.toDto(a)).collect(Collectors.toList());
     }
 
     @GetMapping("/authors/{id}")
     public AuthorDto getAuthorById(@PathVariable(name = "id") Long id){
-        //AuthorMapper authorMapper = new AuthorMapper();
-        Author a = authorService.findAuthorById(id);
-        return authorMapper.toDto(a);
+        return authorMapper.toDto(authorService.findAuthorById(id));
     }
 
     @PostMapping("/authors")
@@ -43,7 +36,8 @@ public class AuthorController {
                                @RequestBody Author author){
         author.setId(id);
         authorService.updateAuthor(author);
-        return authorService.findAuthorById(id);
+        //return authorService.findAuthorById(id);
+        return null;
     }
 
     @DeleteMapping("/authors/{id}")

@@ -20,4 +20,6 @@ public class AuthorMapper {
         authorDto.setBooks(author.getBooks().stream().map(b -> new BookDto(b.getId(), b.getTitle())).collect(Collectors.toList()));
         return authorDto;
     }
+
+
 }

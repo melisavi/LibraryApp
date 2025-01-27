@@ -16,12 +16,12 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<Author> findAllAuthors() {
-        return authorRepository.findAll();
+        return authorRepository.findAllWithBooks();
     }
 
     @Override
     public Author findAuthorById(Long id) {
-        return authorRepository.findById(id).orElseThrow();
+        return authorRepository.findByIdWithBooks(id).orElseThrow();
     }
 
     @Override
