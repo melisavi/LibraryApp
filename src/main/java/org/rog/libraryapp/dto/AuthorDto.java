@@ -1,6 +1,5 @@
-package org.rog.libraryapp.entity;
+package org.rog.libraryapp.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,21 +12,12 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table (name = "authors")
-public class Author {
-    @Id
+public class AuthorDto {
     private Long id;
-    @Column (name = "first_name")
     private String firstName;
-    @Column (name = "last_name")
     private String lastName;
-    @Column (name = "middle_name")
     private String middleName;
-    @Column (name = "birth_date")
     private LocalDate birthDate;
-    @Column (name = "death_date")
     private LocalDate deathDate;
-    @OneToMany (mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Book> books;
+    private List<BookDto> books;
 }

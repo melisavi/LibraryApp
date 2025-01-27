@@ -1,42 +1,42 @@
 package org.rog.libraryapp.service;
 
-import org.rog.libraryapp.dao.AuthorDao;
 import org.rog.libraryapp.entity.Author;
+import org.rog.libraryapp.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
-    private final AuthorDao authorDao;
+    private final AuthorRepository authorRepository;
 
-    public AuthorServiceImpl(AuthorDao authorDao) {
-        this.authorDao = authorDao;
+    public AuthorServiceImpl(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
     }
 
     @Override
     public List<Author> findAllAuthors() {
-        return authorDao.findAllAuthors();
+        return authorRepository.findAll();
     }
 
     @Override
     public Author findAuthorById(Long id) {
-        return authorDao.findAuthorById(id).orElseThrow();
+        return authorRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Long saveAuthor(Author author) {
-        return authorDao.saveAuthor(author).orElseThrow();
+    public Author saveAuthor(Author author) {
+        return authorRepository.save(author);
     }
 
     @Override
     public Author updateAuthor(Author author) {
-        return authorDao.updateAuthor(author).orElseThrow();
+        return authorRepository.save(author);
     }
 
     @Override
     public void deleteAuthor(Long id) {
-        authorDao.deleteAuthor(id);
+        authorRepository.deleteById(id);
     }
 
 }
