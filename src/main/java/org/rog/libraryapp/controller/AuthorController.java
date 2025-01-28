@@ -16,7 +16,7 @@ public class AuthorController {
     private final AuthorService authorService;
     private final AuthorMapper authorMapper;
 
-    @GetMapping("/authors/withbooks")
+    @GetMapping("/authors")
     public List<AuthorDto> getAllAuthors(){
         return authorService.findAllAuthors().stream().map(a -> authorMapper.toDto(a)).collect(Collectors.toList());
     }
