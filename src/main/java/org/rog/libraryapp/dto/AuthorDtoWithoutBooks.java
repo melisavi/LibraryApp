@@ -1,5 +1,6 @@
 package org.rog.libraryapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AuthorDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class AuthorDtoWithoutBooks {
     private Long id;
-    private String firstName;
+    /*private String firstName;
     private String lastName;
     private String middleName;
     private LocalDate birthDate;
-    private LocalDate deathDate;
-    private List<BookDto> books;
+    private LocalDate deathDate;*/
 }

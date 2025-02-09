@@ -9,7 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BookDto {
+public class BookWithAuthorDto {
     private Long id;
     private String title;
+    private AuthorDtoWithoutBooks author;
 }
