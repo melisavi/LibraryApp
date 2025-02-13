@@ -27,6 +27,6 @@ public class Author {
     private LocalDate birthDate;
     @Column (name = "death_date")
     private LocalDate deathDate;
-    @OneToMany (mappedBy = "author", fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "author", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Book> books;
 }

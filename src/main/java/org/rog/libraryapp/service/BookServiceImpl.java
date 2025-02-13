@@ -8,9 +8,9 @@ import org.rog.libraryapp.exception.BookNotFoundException;
 import org.rog.libraryapp.repository.AuthorRepository;
 import org.rog.libraryapp.repository.BookRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,10 +25,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findBookById(Long id) {
-        if(!bookRepository.existsById(id)){
-            throw new BookNotFoundException(id);
-        }
-        return bookRepository.findBookById(id).orElseThrow();
+        return bookRepository.findBookById(id).orElseThrow(()-> new BookNotFoundException(id));
     }
 
     @Override
@@ -36,7 +33,7 @@ public class BookServiceImpl implements BookService {
         if(!authorRepository.existsById(authorId)){
             throw new AuthorNotFoundException(authorId);
         }
-        return bookRepository.findBookByAuthor(authorId);
+        return bookRepository.findBooksByAuthor(authorId);
     }
 
     @Override
@@ -51,7 +48,21 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book updateBook(Book book, Long id, Long authorId) {
+    public Book updateBook(String title, Long id) {
+        if(!bookRepository.existsById(id)){
+            throw new BookNotFoundException(id);
+        }
+        Optional<Book> o = bookRepository.findBookById(id);
+        if (!o.isEmpty()) {
+            Book book = o.get();
+            book.setTitle(title);
+            return bookRepository.save(book);
+        } else throw new BookNotFoundException(id);
+    }
+
+    @Override
+    public Book updateAuthorInBook(Book book, Long authorId) {
+        Long id = book.getId();
         if(!authorRepository.existsById(authorId)){
             throw new AuthorNotFoundException(authorId);
         }
@@ -61,7 +72,6 @@ public class BookServiceImpl implements BookService {
         if(!bookRepository.existsById(id)){
             throw new BookNotFoundException(id);
         }
-        book.setId(id);
         return bookRepository.save(book);
     }
 

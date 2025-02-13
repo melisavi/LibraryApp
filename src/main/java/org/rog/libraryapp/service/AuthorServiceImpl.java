@@ -39,8 +39,11 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author updateAuthor(Author author) {
-        if (!authorRepository.existsByUniqueIndex(author.getFirstName(), author.getLastName(), author.getMiddleName())) {
+        if (!authorRepository.existsById(author.getId())) {
             throw new AuthorNotFoundException(author.getId());
+        }
+        if (authorRepository.existsByUniqueIndex(author.getFirstName(), author.getLastName(), author.getMiddleName())) {
+            throw new AuthorAlreadyExistsException(author.getFirstName(), author.getLastName(), author.getMiddleName());
         }
         return authorRepository.save(author);
     }

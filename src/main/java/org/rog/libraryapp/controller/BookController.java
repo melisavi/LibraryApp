@@ -2,6 +2,8 @@ package org.rog.libraryapp.controller;
 
 import lombok.AllArgsConstructor;
 import org.rog.libraryapp.dto.BookWithAuthorDto;
+import org.rog.libraryapp.dto.BookWithoutAuthorDto;
+import org.rog.libraryapp.entity.Author;
 import org.rog.libraryapp.entity.Book;
 import org.rog.libraryapp.mapper.BookMapper;
 import org.rog.libraryapp.service.BookService;
@@ -43,11 +45,18 @@ public class BookController {
         );
     }
 
+    @PatchMapping("/books/{id}")
+    BookWithoutAuthorDto updateBook(@PathVariable(name = "id") Long id,
+                                 @RequestBody BookWithoutAuthorDto bookWithoutAuthorDto) {
+        return bookMapper.toDtoWithoutAuthor(bookService.updateBook(bookWithoutAuthorDto.getTitle(), id));
+    }
+
     @PatchMapping("/author/{authorId}/books/{id}")
-    BookWithAuthorDto updateBook(@PathVariable(name = "authorId") Long authorId,
-                                 @PathVariable(name = "id") Long id,
-                                 @RequestBody BookWithAuthorDto bookWithAuthorDto) {
-        return bookMapper.toDtoWithAuthor(bookService.updateBook(bookMapper.toEntityWithAuthor(bookWithAuthorDto), id, authorId));
+    BookWithAuthorDto updateAuthorInBook(@PathVariable(name = "authorId") Long authorId,
+                                 @PathVariable(name = "id") Long id
+                                 ) {
+        Book book = bookService.findBookById(id);
+        return bookMapper.toDtoWithAuthor(bookService.updateAuthorInBook(book, authorId));
     }
 
     @DeleteMapping("/books/{id}")

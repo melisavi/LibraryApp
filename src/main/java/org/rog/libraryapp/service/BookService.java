@@ -13,7 +13,9 @@ public interface BookService {
 
     Book saveBook(Book book, Long authorId);
 
-    Book updateBook(Book book, Long id, Long authorId);
+    Book updateBook(String title, Long id);
 
     void deleteBook(Long id);
+
+    Book updateAuthorInBook(Book book, Long authorId);
 }
