@@ -1,5 +1,6 @@
 package org.rog.libraryapp.util;
 
+import org.rog.libraryapp.entity.ApplicationUser;
 import org.rog.libraryapp.entity.Author;
 import org.rog.libraryapp.entity.Book;
 
@@ -33,5 +34,16 @@ public final class TestDataProvider {
                         .author(author)
                         .build()
         ).toList();
+    }
+
+    public static ApplicationUser buildApplicationUser() {
+        return ApplicationUser.builder()
+                        .login("melisavi")
+                        .password("rog")
+                        .isAccountNonExpired(true)
+                        .isAccountNonLocked(true)
+                        .isCredentialsNonExpired(true)
+                        .isEnabled(true)
+                        .build();
     }
 }
