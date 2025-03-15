@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>library-core</module>
+        <module>library-auth</module>
     </modules>
 
     <parent>
