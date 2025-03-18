@@ -3,8 +3,8 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <changeSet id="25-02-2025-add-users-table.xml" author="rog">
-        <createTable tableName="application_users" remarks="table of users">
+    <changeSet id="25-02-2025-add-user-accounts-table.xml" author="rog">
+        <createTable tableName="application_user_accounts" remarks="table of users">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -27,6 +27,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addUniqueConstraint tableName="application_users" columnNames="login"/>
+        <addUniqueConstraint tableName="application_user_accounts" columnNames="login"/>
     </changeSet>
 </databaseChangeLog>

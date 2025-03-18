@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,8 +17,9 @@ public class ApplicationUserDto {
     private Long id;
     private String login;
     private String password;
-    /*private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
-    private boolean isEnabled;*/
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private LocalDate birthDate;
+    private String gender;
 }

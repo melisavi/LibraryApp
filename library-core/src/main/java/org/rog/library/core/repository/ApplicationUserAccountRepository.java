@@ -1,6 +1,5 @@
 package org.rog.library.core.repository;
 
-import org.rog.library.core.entity.ApplicationUser;
 import org.rog.library.core.entity.ApplicationUserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, String> {
-    @Query(value = "select user from ApplicationUser user where user.id =:id")
-    Optional<ApplicationUser> findById(long id);
+public interface ApplicationUserAccountRepository extends JpaRepository<ApplicationUserAccount, String> {
+    @Query(value = "select user from ApplicationUserAccount user where user.login =:login")
+    Optional<ApplicationUserAccount> findByLogin(String login);
 }

@@ -1,7 +1,7 @@
 package org.rog.library.core.service;
 
-import org.rog.library.core.entity.ApplicationUser;
+import org.rog.library.core.dto.ApplicationUserDto;
 
 public interface ApplicationUserService {
-    void saveUser(ApplicationUser user);
+    void registerUser(ApplicationUserDto userDto);
 }

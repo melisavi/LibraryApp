@@ -3,18 +3,17 @@ package org.rog.library.core.mapper;
 import org.mapstruct.Mapper;
 import org.rog.library.core.dto.ApplicationUserDto;
 import org.rog.library.core.entity.ApplicationUser;
+import org.rog.library.core.entity.ApplicationUserAccount;
 
 @Mapper
 public interface ApplicationUserMapper {
-    ApplicationUserDto toDto(ApplicationUser user);
     default ApplicationUser toEntity(ApplicationUserDto userDto){
         return ApplicationUser.builder()
-                .login(userDto.getLogin())
-                .password(userDto.getPassword())
-                .isAccountNonExpired(true)
-                .isAccountNonLocked(true)
-                .isCredentialsNonExpired(true)
-                .isEnabled(true)
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
+                .middleName(userDto.getMiddleName())
+                .birthDate(userDto.getBirthDate())
+                .gender(userDto.getGender())
                 .build();
     };
 }
