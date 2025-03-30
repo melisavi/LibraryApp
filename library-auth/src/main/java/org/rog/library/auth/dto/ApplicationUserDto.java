@@ -1,4 +1,4 @@
-package org.rog.library.core.dto;
+package org.rog.library.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

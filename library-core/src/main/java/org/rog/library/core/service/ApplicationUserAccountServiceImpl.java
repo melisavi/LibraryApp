@@ -1,9 +1,9 @@
 package org.rog.library.core.service;
 
 import lombok.RequiredArgsConstructor;
+import org.rog.library.common.repository.ApplicationUserAccountRepository;
 import org.rog.library.core.exception.ApplicationUserAlreadyExistsException;
-import org.rog.library.core.repository.ApplicationUserAccountRepository;
-import org.rog.library.core.entity.ApplicationUserAccount;
+import org.rog.library.common.entity.ApplicationUserAccount;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

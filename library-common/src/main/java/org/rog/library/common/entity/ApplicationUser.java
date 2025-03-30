@@ -1,4 +1,4 @@
-package org.rog.library.core.entity;
+package org.rog.library.common.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

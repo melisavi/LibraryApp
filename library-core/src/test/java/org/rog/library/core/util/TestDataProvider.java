@@ -1,7 +1,6 @@
 package org.rog.library.core.util;
 
 import org.rog.library.core.entity.Author;
-import org.rog.library.core.entity.ApplicationUserAccount;
 import org.rog.library.core.entity.Book;
 
 import java.time.LocalDate;
@@ -34,16 +33,5 @@ public final class TestDataProvider {
                         .author(author)
                         .build()
         ).toList();
-    }
-
-    public static ApplicationUserAccount buildApplicationUser() {
-        return ApplicationUserAccount.builder()
-                        .login("melisavi")
-                        .password("rog")
-                        .isAccountNonExpired(true)
-                        .isAccountNonLocked(true)
-                        .isCredentialsNonExpired(true)
-                        .isEnabled(true)
-                        .build();
     }
 }

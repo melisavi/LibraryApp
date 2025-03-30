@@ -1,4 +1,4 @@
-package org.rog.library.core.config;
+package org.rog.library.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().authenticated())
-                .httpBasic();//.formLogin();
+                        .anyRequest().permitAll());
         return http.build();
     }
 

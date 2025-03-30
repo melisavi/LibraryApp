@@ -1,10 +1,8 @@
-package org.rog.library.core.controller;
+package org.rog.library.auth.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.rog.library.core.dto.ApplicationUserDto;
-import org.rog.library.core.mapper.ApplicationUserAccountMapper;
-import org.rog.library.core.mapper.ApplicationUserMapper;
-import org.rog.library.core.service.ApplicationUserService;
+import org.rog.library.auth.dto.ApplicationUserDto;
+import org.rog.library.auth.service.ApplicationUserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

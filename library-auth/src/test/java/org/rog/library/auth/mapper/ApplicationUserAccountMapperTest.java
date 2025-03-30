@@ -1,10 +1,11 @@
-package org.rog.library.core.mapper;
+package org.rog.library.auth.mapper;
 
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
-import org.rog.library.core.dto.ApplicationUserDto;
-import org.rog.library.core.entity.ApplicationUserAccount;
-import org.rog.library.core.util.TestDataProvider;
+import org.rog.library.auth.dto.ApplicationUserDto;
+import org.rog.library.auth.util.TestDataProvider;
+import org.rog.library.common.entity.ApplicationUserAccount;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
