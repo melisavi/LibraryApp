@@ -13,5 +13,8 @@ spring:
 jwt:
   secret: "secreteeffffffffffffffffffffffffffffffffffffffffffaf"
 
+authService:
+  secret: "ZaxyksdDXoEe"
+
 
 
