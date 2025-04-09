@@ -1,6 +1,6 @@
-package org.rog.library.common.repository;
+package org.rog.library.core.repository;
 
-import org.rog.library.common.entity.ApplicationUser;
+import org.rog.library.core.entity.ApplicationUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package org.rog.library.auth.util;
 
-import org.rog.library.common.entity.ApplicationUserAccount;
+import org.rog.library.auth.entity.ApplicationUserAccount;
 
 public final class TestDataProvider {
     private TestDataProvider(){

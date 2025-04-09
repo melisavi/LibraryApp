@@ -1,7 +1,7 @@
 package org.rog.library.auth.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.rog.library.auth.dto.ApplicationUserDto;
+import org.rog.library.auth.dto.ApplicationFullUserDto;
 import org.rog.library.auth.dto.LoginRequest;
 import org.rog.library.auth.service.ApplicationUserService;
 import org.rog.library.auth.service.AuthService;
@@ -16,7 +16,7 @@ public class ApplicationUserController {
     private final AuthService authService;
 
     @PostMapping("/api/v1/registration")
-    public void registerUser(@RequestBody ApplicationUserDto userDto){
+    public void registerUser(@RequestBody ApplicationFullUserDto userDto){
         applicationUserService.registerUser(userDto);
     }
 

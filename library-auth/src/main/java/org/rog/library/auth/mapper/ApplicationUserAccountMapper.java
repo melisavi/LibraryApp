@@ -1,13 +1,13 @@
 package org.rog.library.auth.mapper;
 
 import org.mapstruct.Mapper;
-import org.rog.library.auth.dto.ApplicationUserDto;
-import org.rog.library.common.entity.ApplicationUserAccount;
+import org.rog.library.auth.dto.ApplicationFullUserDto;
+import org.rog.library.auth.entity.ApplicationUserAccount;
 
 @Mapper
 public interface ApplicationUserAccountMapper {
-    ApplicationUserDto toDto(ApplicationUserAccount user);
-    default ApplicationUserAccount toEntity(ApplicationUserDto userDto){
+    ApplicationFullUserDto toDto(ApplicationUserAccount user);
+    default ApplicationUserAccount toEntity(ApplicationFullUserDto userDto){
         return ApplicationUserAccount.builder()
                 .login(userDto.getLogin())
                 .password(userDto.getPassword())

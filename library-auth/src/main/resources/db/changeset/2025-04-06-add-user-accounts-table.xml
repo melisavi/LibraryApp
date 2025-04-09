@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="2025-04-06-add-user-accounts-table.xml" author="rog">
+        <createTable tableName="application_user_accounts" remarks="table of users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_account_non_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_account_non_locked" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_credentials_non_expired" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="application_user_accounts" columnNames="login"/>
+    </changeSet>
+</databaseChangeLog>

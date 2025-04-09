@@ -1,7 +1,7 @@
 package org.rog.library.auth.service;
 
 import lombok.RequiredArgsConstructor;
-import org.rog.library.common.repository.ApplicationUserAccountRepository;
+import org.rog.library.auth.repository.ApplicationUserAccountRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package org.rog.library.common.entity;
+package org.rog.library.core.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,11 +14,8 @@ import java.time.LocalDate;
 @Table(name = "application_users")
 public class ApplicationUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn (name = "id")
-    private ApplicationUserAccount applicationUserAccount;
     @Column (name = "first_name")
     private String firstName;
     @Column (name = "last_name")

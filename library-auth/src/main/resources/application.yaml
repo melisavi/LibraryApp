@@ -3,11 +3,13 @@ spring:
   #  url: jdbc:postgresql://localhost:5432/library
   #  username: postgres
   #  password: postgres
+  liquibase:
+    change-log: classpath:db/changelog.xml
+
   jpa:
     show-sql: true
     open-in-view: false
+
 jwt:
   ttlInMinutes: 10
   secret: "secreteeffffffffffffffffffffffffffffffffffffffffffaf"
-
-

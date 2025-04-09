@@ -1,8 +1,8 @@
-package org.rog.library.auth.mapper;
+package org.rog.library.core.mapper;
 
 import org.mapstruct.Mapper;
-import org.rog.library.auth.dto.ApplicationUserDto;
-import org.rog.library.common.entity.ApplicationUser;
+import org.rog.library.common.dto.ApplicationUserDto;
+import org.rog.library.core.entity.ApplicationUser;
 
 @Mapper
 public interface ApplicationUserMapper {
