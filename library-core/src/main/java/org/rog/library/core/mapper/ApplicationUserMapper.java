@@ -8,6 +8,7 @@ import org.rog.library.core.entity.ApplicationUser;
 public interface ApplicationUserMapper {
     default ApplicationUser toEntity(ApplicationUserDto userDto){
         return ApplicationUser.builder()
+                .login(userDto.getLogin())
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .middleName(userDto.getMiddleName())

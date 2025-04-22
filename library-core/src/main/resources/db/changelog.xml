@@ -7,4 +7,5 @@
     <include file="changeset/2025-02-25-add-user-accounts-table.xml" relativeToChangelogFile="true"/>
     <include file="changeset/2025-03-18-add-users-table.xml" relativeToChangelogFile="true"/>
     <include file="changeset/2025-04-08-users-schema-refactoring.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/2025-04-22-add-column-login-to-user.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

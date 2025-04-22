@@ -26,8 +26,7 @@ public class SecurityConfig {
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .anyRequest().authenticated())
-                .addFilterBefore(new JwtFilter(secretKey)
-                        , BasicAuthenticationFilter.class);
+                .addFilterBefore(new JwtFilter(secretKey), BasicAuthenticationFilter.class);
         return http.build();
     }
 

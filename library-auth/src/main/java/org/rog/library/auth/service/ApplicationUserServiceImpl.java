@@ -26,7 +26,6 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
         ApplicationUserAccount applicationUserAccount = applicationUserAccountMapper.toEntity(userDto);
         applicationUserAccount.setPassword(passwordEncoder.encode(applicationUserAccount.getPassword()));
         repository.save(applicationUserAccount);
-        userDto.setLogin(null); //TODO: в приватный метод
         userDto.setPassword(null);
         kafkaTemplate.send("users", userDto);
     }
