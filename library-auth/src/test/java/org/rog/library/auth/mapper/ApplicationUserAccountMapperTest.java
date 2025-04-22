@@ -2,10 +2,9 @@ package org.rog.library.auth.mapper;
 
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
-import org.rog.library.auth.dto.ApplicationFullUserDto;
-import org.rog.library.auth.util.TestDataProvider;
 import org.rog.library.auth.entity.ApplicationUserAccount;
-
+import org.rog.library.auth.util.TestDataProvider;
+import org.rog.library.common.dto.ApplicationUserDto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,7 +15,7 @@ class ApplicationUserAccountMapperTest {
     @Test
     void toEntity() {
         ApplicationUserAccount user = TestDataProvider.buildApplicationUser();
-        ApplicationFullUserDto userDto = mapper.toDto(user);
+        ApplicationUserDto userDto = mapper.toDto(user);
         ApplicationUserAccount user2 = mapper.toEntity(userDto);
         assertEquals(userDto.getLogin(), user2.getLogin());
         assertEquals(userDto.getPassword(), user2.getPassword());

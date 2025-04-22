@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class ApplicationUserDto {
+    private String login;
+    private String password;
     private String firstName;
     private String lastName;
     private String middleName;

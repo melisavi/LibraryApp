@@ -1,7 +1,7 @@
 package org.rog.library.auth.service;
 
-import org.rog.library.auth.dto.ApplicationFullUserDto;
+import org.rog.library.common.dto.ApplicationUserDto;
 
 public interface ApplicationUserService {
-    void registerUser(ApplicationFullUserDto userDto);
+    void registerUser(ApplicationUserDto userDto);
 }

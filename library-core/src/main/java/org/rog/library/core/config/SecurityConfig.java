@@ -1,6 +1,5 @@
 package org.rog.library.core.config;
 
-import org.rog.library.core.filter.AuthServiceRequestFilter;
 import org.rog.library.core.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +18,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig {
     @Value("${jwt.secret}")
     private String secretKey;
-    @Value("${authService.secret}")
-    private String authServiceKey;
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
@@ -30,9 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtFilter(secretKey)
-                        , BasicAuthenticationFilter.class)
-                .addFilterAfter(new AuthServiceRequestFilter(authServiceKey)
-                , BasicAuthenticationFilter.class);
+                        , BasicAuthenticationFilter.class);
         return http.build();
     }
 
