@@ -12,10 +12,10 @@ spring:
 
 jwt:
   ttlInMinutes: 10
-  secret: "secreteeffffffffffffffffffffffffffffffffffffffffffaf"
+  secret: "secretjwt"
 
 authService:
-  secret: "ZaxyksdDXoEe"
+  secret: "secret"
 
 libraryCore:
   url: "http://localhost:8081/api/v1/user"

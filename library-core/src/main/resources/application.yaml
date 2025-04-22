@@ -5,16 +5,31 @@ spring:
   #  password: postgres
   liquibase:
     change-log: classpath:db/changelog.xml
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: librarycore
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      enable-auto-commit: true
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+            value:
+              default:
+                type: org.rog.library.common.dto.ApplicationUserDto
 
   jpa:
     show-sql: true
     open-in-view: false
 
 jwt:
-  secret: "secreteeffffffffffffffffffffffffffffffffffffffffffaf"
+  secret: "secretjwt"
 
 authService:
-  secret: "ZaxyksdDXoEe"
-
+  secret: "secret"
 
 
