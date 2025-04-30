@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +29,6 @@ public class ApplicationUser {
     private LocalDate birthDate;
     @Column (name = "gender")
     private String gender;
+    @OneToMany (mappedBy = "applicationUser", fetch = FetchType.LAZY)
+    private List<Book> books;
 }

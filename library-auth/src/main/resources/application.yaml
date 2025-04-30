@@ -12,5 +12,5 @@ spring:
     open-in-view: false
 
 jwt:
-  ttlInMinutes: 10
+  ttlInMinutes: 100
   secret: "secretjwt"

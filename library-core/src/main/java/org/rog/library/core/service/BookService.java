@@ -18,4 +18,5 @@ public interface BookService {
     void deleteBook(Long id);
 
     Book updateAuthorInBook(Book book, Long authorId);
+
 }

@@ -6,6 +6,7 @@ import org.rog.library.core.mapper.BookMapper;
 import org.rog.library.core.service.BookService;
 import org.rog.library.core.dto.BookWithAuthorDto;
 import org.rog.library.core.entity.Book;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,4 +63,5 @@ public class BookController {
     void deleteBook(@PathVariable(name = "id") Long id) {
         bookService.deleteBook(id);
     }
+
 }

@@ -1,5 +1,6 @@
-package org.rog.library.core.exception;
+package org.rog.library.core.exception.handler;
 
+import org.rog.library.core.exception.BookNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
