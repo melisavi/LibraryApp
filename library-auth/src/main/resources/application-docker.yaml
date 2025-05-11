@@ -4,3 +4,9 @@ spring:
     url: jdbc:postgresql://postgres:5432/libraryauth
     username: postgres
     password: postgres
+
+  kafka:
+    producer:
+      bootstrap-servers: kafka:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
